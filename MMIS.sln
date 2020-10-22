@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMIS", "MMIS\MMIS.csproj", "{F67D9153-C7EA-4FD8-BB5D-760A414D8B54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryMMIS", "LibraryMMIS\LibraryMMIS.csproj", "{45DD0001-7C65-43AD-85ED-272E48CCFAE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F67D9153-C7EA-4FD8-BB5D-760A414D8B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F67D9153-C7EA-4FD8-BB5D-760A414D8B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F67D9153-C7EA-4FD8-BB5D-760A414D8B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F67D9153-C7EA-4FD8-BB5D-760A414D8B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45DD0001-7C65-43AD-85ED-272E48CCFAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45DD0001-7C65-43AD-85ED-272E48CCFAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45DD0001-7C65-43AD-85ED-272E48CCFAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45DD0001-7C65-43AD-85ED-272E48CCFAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
