@@ -62,6 +62,7 @@ namespace LibraryMMIS
 
         public static long ResolveModuleEquation(long st, long en, long y, long a, long b) //уравнение типа yx mod a = b 
         {
+            
             if (b >= a)
                 throw new Exception("b should be less a");
             for (long i = st; i < en; i++)
@@ -104,7 +105,8 @@ namespace LibraryMMIS
             return 0;
         }
         
-        public static long bin_pow(long b, long p, long MOD) { //a^n mod  2^125  
+        public static long bin_pow(long b, long p, long MOD) 
+        { //a^n mod  2^125  
             if (p == 1) {
                 return b;    //Выход из рекурсии.
             }

@@ -34,22 +34,24 @@ namespace LibraryMMIS
                 Y = Supporting.bin_pow(g, x, p);
                 m = Message;
                 if (K == 0)
-                    k = r.Next(1, (int)p-1);
+                {
+                    while (!Supporting.MutuallySimple(k, p - 1))
+                    {
+                        k = r.Next(1, (int)p - 1);
+                    }
+                }
+                    
                 else
                 {
                     k = K;
                     if (!(1 < k && k < p - 1) &&! Supporting.MutuallySimple(k,p-1))
                         throw new Exception("k - сессионный ключ обязан придерживаться условия 1<k<p-1");
-                    
-                    A = Supporting.bin_pow(g, k, p);
-                    
-                    B = (Supporting.bin_pow(Y, k, p)*(m%p))%p;
-                    
-                    DecodeM = ((B % p) * Supporting.divide_pow(A, x,p)) % p;
-                    
                 }
-                
-                
+                A = Supporting.bin_pow(g, k, p);
+                    
+                B = (Supporting.bin_pow(Y, k, p)*(m%p))%p;
+                    
+                DecodeM = ((B % p) * Supporting.divide_pow(A, x,p)) % p;
             }
             catch (Exception e)
             {

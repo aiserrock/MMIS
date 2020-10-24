@@ -78,10 +78,10 @@ namespace LibraryMMIS
                    + $"2) s = c^(p+1/4) mod q = {s}\n"
                    + $" Найдём целые числа a и b такие что ap + bq = 1, a{p} + b{q} = 1\na = {a}, b = {b}\n"
                    + $" Тогда одно из этих 4ех сообщений будет нашим зашифрованным:\n"
-                   + $"m1 = +(aps+bqr)={m1}\n"
-                   + $"m2 = -(aps+bqr)={m2}\n"
-                   + $"m3 = +(aps-bqr)={m3}\n"
-                   + $"m4 = -(aps-bqr)={m4}\n";
+                   + $"m1 = +(aps+bqr) mod n={m1}\n"
+                   + $"m2 = -(aps+bqr) mod n={m2}\n"
+                   + $"m3 = +(aps-bqr) mod n={m3}\n"
+                   + $"m4 = -(aps-bqr) mod n={m4}\n";
         }
     }
 }
