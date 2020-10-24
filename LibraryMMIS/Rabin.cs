@@ -47,10 +47,18 @@ namespace LibraryMMIS
                 Supporting.ResolveDeofantovoEquation(ref a, ref b, p, q, 1);
                 this.a = a;
                 this.b = b;
-                m1 = +((a * p * s + b * q * r) % n);
-                m2 = -((a * p * s + b * q * r) % n);
-                m3 = +((a * p * s - b * q * r) % n);
-                m4 = -((a * p * s - b * q * r) % n);
+                m1 = +((a * p * s + b * q * r)) % n;
+                if (m1 < 0)
+                    m1 += n;
+                m2 = -((a * p * s + b * q * r)) % n;
+                if (m2 < 0)
+                    m2 += n;
+                m3 = +((a * p * s - b * q * r)) % n;
+                if (m3 < 0)
+                    m3 += n;
+                m4 = -((a * p * s - b * q * r)) % n;
+                if (m4 < 0)
+                    m4 += n;
             }
             catch (Exception exception)
             {
