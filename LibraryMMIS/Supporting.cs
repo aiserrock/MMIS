@@ -24,8 +24,8 @@ namespace LibraryMMIS
             return true; 
         }
 
-        
-        static long GetNOD(long a, long b) //Поиск NOD
+
+        public static long GetNOD(long a, long b) //Поиск NOD
         {
             if (a == 0) 
             { 
@@ -38,6 +38,56 @@ namespace LibraryMMIS
                 //вызываем метод с новыми аргументами
                 return GetNOD(max % min, min); 
             } 
+        }
+
+        public static void extendedEuclid(long a, long b, out long x, out long y, out long d)
+        {
+            long q, r, x0, x1, y0, y1;
+            if (b == 0)
+            {
+                d = a;
+                x = 1;
+                y = 0;
+            }
+
+            x0 = 1;
+            x1 = 0;
+            y0 = 0;
+            y1 = 1;
+
+            while (b > 0)
+            {
+                q = a / b;
+                r = a - q * b;
+                a = b;
+                b = r;
+                x = x0 - q * x1;
+                y = y0 - q * y1;
+                x0 = x1;
+                x1 = x;
+                y0 = y1;
+                y1 = y;
+            }
+
+            d = a;//NOD
+            x = x0;
+            y = y0;
+        }
+        //Входные параметры
+        //1) Обратное число - number
+        //2) mod числа - mod
+        //Выход
+        //Число - обратное к number - reverseNumber
+        public static long getMultiplicative(long number, long mod) //Нод - мультипликативный элемент
+        {
+            long d, x, y;
+            extendedEuclid(number,mod, out x, out y, out d);
+            if (d == 1)
+            {
+                return x;
+            }
+
+            throw new Exception("Числа a и n должны быть взаимно простыми");
         }
 
         public static bool MutuallySimple(long val1, long val2) //проверка на взаимную простоту чисел.

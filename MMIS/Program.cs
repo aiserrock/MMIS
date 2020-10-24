@@ -36,6 +36,13 @@ namespace MMIS
                     ElGamale elGamale= new ElGamale(p,q,8,7,x);
                     Console.WriteLine(elGamale.ToString());
                     break;
+                case "5":
+                    long d1, x1, y1;
+                    Console.WriteLine(Supporting.GetNOD(7,3));
+                    Supporting.extendedEuclid(7, 3, out x1, out y1, out d1);
+                    Console.WriteLine($"{d1},{x1},{y1}");
+                    Console.WriteLine(Supporting.getMultiplicative(3,7));
+                    break;
                 default:
                         break;
             }
