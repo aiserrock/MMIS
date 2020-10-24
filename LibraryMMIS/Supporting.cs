@@ -104,7 +104,7 @@ namespace LibraryMMIS
             return 0;
         }
         
-        public static long bin_pow(long b, long p, long MOD) {
+        public static long bin_pow(long b, long p, long MOD) { //a^n mod  2^125  
             if (p == 1) {
                 return b;    //Выход из рекурсии.
             }
@@ -122,11 +122,11 @@ namespace LibraryMMIS
         }
 
         //(a / b) mod m
-        public static long divide(long a,long b, long MOD) {
+        public static long divide(long a,long b, long MOD) { // a/b mod k 
             return a * inverse_element(b,MOD) % MOD;
         }
         
-        public static long divide_pow(long a,long pow, long MOD)///деление выражений 1/a+
+        public static long divide_pow(long a,long pow, long MOD)/// 1/b^k mod 
         {
             long t = 1;
             for (int i = 0; i < pow; i++)
@@ -135,6 +135,8 @@ namespace LibraryMMIS
             }
             return t % MOD;
         }
+        
+       
         
         
     }
