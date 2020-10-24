@@ -74,7 +74,7 @@ namespace LibraryMMIS
             y = y0;
         }
         //Входные параметры
-        //1) Обратное число - number
+        //1) число - number
         //2) mod числа - mod
         //Выход
         //Число - обратное к number - reverseNumber
@@ -87,7 +87,7 @@ namespace LibraryMMIS
                 return x;
             }
 
-            throw new Exception("Числа a и n должны быть взаимно простыми");
+            throw new Exception("Числа a и n должны быть взаимно простыми, не существует решения для входных параметров");
         }
 
         public static bool MutuallySimple(long val1, long val2) //проверка на взаимную простоту чисел.
