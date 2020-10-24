@@ -19,7 +19,9 @@ namespace LibraryMMIS
         {
             try
             {
-                if(Supporting.Simple(p))
+                if(!Supporting.Simple(p))
+                    throw new Exception("p should be simple");
+                    
                 r = new Random(DateTime.Now.Second); 
                 if (X == 0)
                     x = r.Next(1, (int)p);
