@@ -53,10 +53,9 @@ namespace LibraryMMIS
             return $"({p},{q},{d})";
         }
         
-        public string DecodeMessageGet(long c, long d, long n)
+        public static string DecodeMessageGet(long c, long d, long n)
         {
-            X = Supporting.bin_pow(c, d, n);
-            string resolve = "Расшифруем сообщение и получим X = c^d mod n = {c}^{d} mod {n} = {X}";
+            string resolve = "Расшифруем сообщение и получим X = c^d mod n = {c}^{d} mod {n} = {Supporting.bin_pow(c, d, n)}";
             return resolve;
         }
         public override string ToString()

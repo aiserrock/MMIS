@@ -117,7 +117,7 @@ namespace LibraryMMIS
             }
         }
 
-        public string SignatureVerificationGet(long a, long b, long p, long g, long y, long Message)
+        public static string SignatureVerificationGet(long a, long b, long p, long g, long y, long Message)
         {
             string resolve = "";
             PublicKey publicKey = new PublicKey()
@@ -128,22 +128,20 @@ namespace LibraryMMIS
             };
             resolve += $"Решение:" +
                        $"Получен публичный ключ: {publicKey.ToString()}\n" +
-                       $"Поступило сообщение M = {M} и цифровая подпись (a = {A} и b = {B})\n" +
+                       $"Поступило сообщение M = {Message} и цифровая подпись (a = {a} и b = {b})\n" +
                        $"Получатель вычисляет два числа:\n" +
                        $"1)Number1=(y^a)*(a^b) mod p = (((y^a) mod p)*((a^b) mod p)) mod p." +
                        $"2)Number2=g^M mod p";
                        // проверка подлинности подписи
-            ANumber1 = (Supporting.bin_pow(publicKey.y, a, publicKey.p) * Supporting.bin_pow(a, b, publicKey.p)) % publicKey.p;
-            ANumber2 = Supporting.bin_pow(publicKey.g, Message, publicKey.p);
+            long ANumber1 = (Supporting.bin_pow(publicKey.y, a, publicKey.p) * Supporting.bin_pow(a, b, publicKey.p)) % publicKey.p;
+            long ANumber2 = Supporting.bin_pow(publicKey.g, Message, publicKey.p);
 
             if (ANumber1 == ANumber2)
             {
-                Аuthenticity = true;
                 resolve += $"Т.к Number1=Number2={ANumber1} ,то сообщение является подлинным ";
             }
             else
             {
-                Аuthenticity = false;
                 resolve += $"Т.к Number1={ANumber1} и Number2={ANumber2} - они не равны друг друга ,поэтому сообщение является фальшивым или подпись неподлинная ";
             }
             return "";
@@ -156,7 +154,7 @@ namespace LibraryMMIS
                    + $"Вычислим значение открытого ключа y = g^x mod p = {pk.g}^{sk.x} mod {pk.p} ={pk.y}\n"
                    + $"Вычислим цифровую подпись для сообщения M = {M}\n"
                    + $"    1)Сначала выберем случайное число k = {k}, 1<k<p-1, такое, что числа k и p-1 взаимно простые - {Supporting.MutuallySimple(k, pk.p - 1)}\n"
-                   + $"1.1)Найдём число k^-1 такое что выполняется условие k*k^(-1) = 1 mod(p-1) т.е {k}*k^(-1) = 1 mod {pk.p - 1}\n"
+                   + $"1.1)Найдём число k^-1 такое что выполняется условие k*k^(-1) = 1 mod(p-1) т.е {k}*{k}^(-1) = 1 mod {pk.p - 1} | k^-1 = {ReverseK} \n"
                    + $"    2)Вычислить числа a = g^k mod p = {pk.g}^{k} mod {pk.p} = {A}, и с помощью секретного ключа x вычислим b = (M-xa)k^-1 mod (p-1)={B}\n"
                    + $"Тем самым цифровая подпись представляет собой пару чисел: a = {A}, b = {B}..\n"
                    + $"    3)Проверим подпись. Приняв сообщение M = {M} и цифровую подпись (a = {A} и b = {B})\n"
