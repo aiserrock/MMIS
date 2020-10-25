@@ -5,24 +5,29 @@ namespace LibraryMMIS
 {
     public class Rabin
     {
-        private long p { get; set; }
+        private long p { get; set; }/// <summary>
+                                    /// p и q - секретный ключ
+                                    /// n - открытый ключ
+                                    /// r,s,a,b - вспомогательные переменные
+                                    /// </summary>
         private long q { get; set; }
         private long n { get; set; }
         private long r { get; set; }
         private long s { get; set; }
-        private long d { get; set; }
         public long a { get; set; }
         public long b { get; set; }
         
-        private long m1 { get; set; }
+        private long m1 { get; set; }/// <summary>
+                                     /// одно из m1...m4 является расшифрованным сообщением.
+                                     /// </summary>
         private long m2 { get; set; }
         private long m3 { get; set; }
         private long m4 { get; set; }
         private long x { get; set; }//число которое хотим зашифровать
 
-        private long c { get; set; }
+        private long c { get; set; }//защифрованное число-сообщение
         
-        private long X { get; set; }//число которое расшифровали.
+
         
         public Rabin(long p,long q,long x)
         {
@@ -30,8 +35,8 @@ namespace LibraryMMIS
             long b = 0;
             try
             {
-                if(!(Supporting.Simple(p)&&Supporting.Simple(q)&&p%4==3&&q%4==3))
-                    throw new Exception("p и q обязаны быть простыми для метода Rabbin ,а также для удобства просчёта p и q по модулю 4 обязаны равняться трём");
+                //if(!(Supporting.Simple(p)&&Supporting.Simple(q)&&p%4==3&&q%4==3))
+                //    throw new Exception("p и q обязаны быть простыми для метода Rabbin ,а также для удобства просчёта p и q по модулю 4 обязаны равняться трём");
                 this.p = p;
                 this.q = q;
                 this.x = x;
@@ -66,6 +71,9 @@ namespace LibraryMMIS
             }
             
         }
+        
+        //p и q - секретные ключи
+        //n - открытый ключ
 
         public override string ToString()
         {

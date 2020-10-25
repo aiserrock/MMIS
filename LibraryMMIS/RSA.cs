@@ -52,7 +52,13 @@ namespace LibraryMMIS
         {
             return $"({p},{q},{d})";
         }
-
+        
+        public string DecodeMessageGet(long c, long d, long n)
+        {
+            X = Supporting.bin_pow(c, d, n);
+            string resolve = "Расшифруем сообщение и получим X = c^d mod n = {c}^{d} mod {n} = {X}";
+            return resolve;
+        }
         public override string ToString()
         {
             return $"p = {p} , q = {q}\n"
