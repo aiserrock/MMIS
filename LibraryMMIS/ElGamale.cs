@@ -60,6 +60,17 @@ namespace LibraryMMIS
             }
             
         }
+        public string DecodeMessageGet(long a, long b, long x)
+        {
+            string resolve = "";
+            DecodeM = ((B % p) * Supporting.divide_pow(A, x,p)) % p;
+            resolve += $"Решение для закодированного сообщения :\n" +
+                       $"Получена пара чисел: a={a} и b={b} - это и есть зашифрованное сообщение. А также мы имеем секретный ключ x = {x}\n" +
+                       $"Для того чтобы раскодировать сообщение воспользуемся формулой" +
+                       $"M = b/a^x mod p = b*a^(-x) mod p= {b}*{a}^(-{x}) mod {p}= (({b}mod{p})*({a}^(-{x}) mod p)) mod p = (({(b % p)})*({Supporting.divide_pow(A, x, p)})) mod {p} = {DecodeM}\n" +
+                       $"Таким образом было полученно расшифрованное сообщение с помощью секретного ключа {x}, сообщение M = {DecodeM}\n";
+            return resolve;
+        }
 
         public override string ToString()
         {

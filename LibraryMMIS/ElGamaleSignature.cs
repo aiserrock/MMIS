@@ -127,18 +127,25 @@ namespace LibraryMMIS
                 y = y
             };
             resolve += $"Решение:" +
-                       $"{publicKey.ToString()}" +
-                       $"";
-            // проверка подлинности подписи
+                       $"Получен публичный ключ: {publicKey.ToString()}\n" +
+                       $"Поступило сообщение M = {M} и цифровая подпись (a = {A} и b = {B})\n" +
+                       $"Получатель вычисляет два числа:\n" +
+                       $"1)Number1=(y^a)*(a^b) mod p = (((y^a) mod p)*((a^b) mod p)) mod p." +
+                       $"2)Number2=g^M mod p";
+                       // проверка подлинности подписи
             ANumber1 = (Supporting.bin_pow(publicKey.y, a, publicKey.p) * Supporting.bin_pow(a, b, publicKey.p)) % publicKey.p;
             ANumber2 = Supporting.bin_pow(publicKey.g, Message, publicKey.p);
+
             if (ANumber1 == ANumber2)
+            {
                 Аuthenticity = true;
+                resolve += $"Т.к Number1=Number2={ANumber1} ,то сообщение является подлинным ";
+            }
             else
             {
                 Аuthenticity = false;
+                resolve += $"Т.к Number1={ANumber1} и Number2={ANumber2} - они не равны друг друга ,поэтому сообщение является фальшивым или подпись неподлинная ";
             }
-
             return "";
         }
 
