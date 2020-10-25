@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Publish MMIS to folder" type="DotNetFolderPublish" factoryName="Publish to folder" editBeforeRun="true" singleton="false">
+    <riderPublish runtime="win-x64" target_folder="$USER_HOME$/Desktop/MIIS" target_framework="netcoreapp3.1" uuid_high="-685231779268112424" uuid_low="-4945667029365585068" />
+    <method v="2" />
+  </configuration>
+</component>

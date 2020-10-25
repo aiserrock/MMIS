@@ -1,0 +1,37 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1/win-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {},
+    ".NETCoreApp,Version=v3.1/win-x64": {
+      "MMIS/1.0.0": {
+        "dependencies": {
+          "LibraryMMIS": "1.0.0"
+        },
+        "runtime": {
+          "MMIS.dll": {}
+        }
+      },
+      "LibraryMMIS/1.0.0": {
+        "runtime": {
+          "LibraryMMIS.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MMIS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LibraryMMIS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

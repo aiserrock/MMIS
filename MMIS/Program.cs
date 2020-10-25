@@ -49,8 +49,9 @@ namespace MMIS
                 default:
                         break;
             }
-           
-            
+
+            Console.ReadLine();
+
         }
     }
 }
