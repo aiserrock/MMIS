@@ -6,14 +6,16 @@ namespace MMIS
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Методы математической защиты информации:\nRSA - 1,\nРэббина - 2\nЭль-Гамаль - 3\nЭлектронноцифровая подпись Гамаля -4\nНОД - Мультипликативный элемент - 5\nИли дополнительные решения к методам (1д ,3д,4д)\n");
+            Console.WriteLine("Методы математической защиты информации:\nRSA - 1,\nРэббина - 2\nЭль-Гамаль - 3\nЭлектронноцифровая подпись Гамаля -4\nНОД - Мультипликативный элемент - 5\nИли дополнительные решения к методам (1д ,3д,4д)\n А также решение задач на поиск примитивных элементов - 100, и решения деофантовых уравнений - 101");
             string methods = Console.ReadLine();
             long p, q, x, g, k,message;
             long c, d, n,y;
             long a, b;
             long x1 = 0, y1=0;
             string outmessage = "";
-            switch (methods)
+            while (true)
+            {
+                switch (methods)
             {
                 case "1":
                     Console.WriteLine("Введите простые числа p и q, и число x которое надо зашифровать по публичкому ключу и расшифровать по секретному ключу");
@@ -38,7 +40,9 @@ namespace MMIS
                     break;
                 case "2":
                     Console.WriteLine("Введите простые числа p и q(по модулю 4 равные трём), и число x которое надо зашифровать по публичкому ключу и расшифровать по секретному ключу");
+                    Console.Write("p= ");
                     p = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("q= ");
                     q = Convert.ToInt64(Console.ReadLine());
                     message = Convert.ToInt64(Console.ReadLine());
                     Rabin rabin = new Rabin(p, q, message);
@@ -58,17 +62,6 @@ namespace MMIS
                     message = Convert.ToInt64(Console.ReadLine());
                     ElGamale elGamale= new ElGamale(p,g,x,k,message);
                     Console.WriteLine(elGamale.ToString());
-                    break;
-                case "5":
-                    long d1;
-                    long m, inversive_elem;
-                    string output = "";
-                    Console.WriteLine("Введите 2 параметра\n -a число, для которого ищем обратное\n -m модуль");
-                    a = Convert.ToInt64(Console.ReadLine());
-                    m = Convert.ToInt64(Console.ReadLine());
-                    Supporting.getMultiplicative(a,m, out output);
-                    Console.WriteLine(output);
-                    
                     break;
                 case "3д":
                     Console.WriteLine(
@@ -117,14 +110,24 @@ namespace MMIS
                     message = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine(ElGamaleSignature.SignatureVerificationGet(a,b,p,g,y,message));
                     break;
+                case "5":
+                    long m;
+                    string output = "";
+                    Console.WriteLine("Введите 2 параметра\n -a число, для которого ищем обратное\n -m модуль");
+                    a = Convert.ToInt64(Console.ReadLine());
+                    m = Convert.ToInt64(Console.ReadLine());
+                    Supporting.getMultiplicative(a,m, out output);
+                    Console.WriteLine(output);
+                    break;
                 case "100":
                     Console.Write("Введите n мультипликативной группе Z(n)*=(1....n-1) по модулю n: ");
                     n = Convert.ToInt64(Console.ReadLine());
                     Console.Write("Введите a принадлежащий группе Z(n)*:");
                     a = Convert.ToInt64(Console.ReadLine());
                     Console.Write("Обратный элемент a^-1 поиск ...");
-                    Supporting.ResolveDeofantovoEquation( ref x1, ref y1,a,n,1);
-                    Console.WriteLine($"Решением уравнения ax+ny=1 т.е {a}x+{n}y = {1},являются x = {x1} , y={y1}." +
+                    Supporting.getMultiplicative(a, n, out outmessage);
+                    Console.WriteLine($"Решим уравнение ax+ny=1 т.е {a}x+{n}y = {1}, где x будет a^-1 т.е обратным элементом" +
+                                      $"{outmessage}" +
                                       $"И обратным элементом для выражения a*a^-1 mod n = 1 ,является a^-1 = {Supporting.inverse_element(a,n)}");
                     Console.WriteLine("Найдем список примитивных элементов группы (Zn)*");
                     Supporting.PrimitivsMultiGroupZ(out outmessage,n);
@@ -139,13 +142,15 @@ namespace MMIS
                     Console.Write("b=: ");
                     b = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("Решим уравнение: ax+by=d , где d=NOD(a,b) (x обратный элемент при d=1): )");
-                    Console.WriteLine("x={x} , y={y} , d = {d}");
+                    Supporting.extendedEuclid(a,b,out x,out y,out d,out outmessage);
+                    Console.WriteLine(outmessage);
+                    Console.WriteLine($"x={x} , y={y} , d = {d}");
                     break;
-                
-                    
                 default:
                         break;
             }
+            }
+            
             Console.ReadLine();
 
         }

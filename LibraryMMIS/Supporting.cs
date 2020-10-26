@@ -43,6 +43,8 @@ namespace LibraryMMIS
         public static void extendedEuclid(long a, long b, out long x, out long y, out long d, out string outputEuclid)
         {
             long q, r, x0, x1, y0, y1;
+            long tempa = a;
+            long tempb = b;
             if (b == 0)
             {
                 d = a;
@@ -77,7 +79,8 @@ namespace LibraryMMIS
             d = a;//NOD
             x = x0;
             y = y0;
-            outputEuclid += $"Получаем {d} = {a} * {x} + {b} * {y}\nНОД = {d}\nx = {x}\ny = {y}\n";
+            outputEuclid += $"NOD = a * x + b*y = d" +
+                            $"Получаем d = {d} = {tempa} * {x} + {tempb} * {y}\nНОД = {d}\nx = {x}\ny = {y}\n";
         }
         //Входные параметры
         //1) число - number
