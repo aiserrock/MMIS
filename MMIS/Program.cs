@@ -15,6 +15,7 @@ namespace MMIS
             string outmessage = "";
             while (true)
             {
+                
                 switch (methods)
             {
                 case "1":
@@ -148,7 +149,18 @@ namespace MMIS
                     break;
                 default:
                         break;
+                
             }
+                Console.WriteLine("Продолжить? 'д', 'н'");
+                if (Console.ReadLine()=="н")
+                {
+                    break;
+                }
+                else 
+                {
+                    Console.WriteLine("Методы математической защиты информации:\nRSA - 1,\nРэббина - 2\nЭль-Гамаль - 3\nЭлектронноцифровая подпись Гамаля -4\nНОД - Мультипликативный элемент - 5\nИли дополнительные решения к методам (1д ,3д,4д)\n А также решение задач на поиск примитивных элементов - 100, и решения деофантовых уравнений - 101");
+                    methods = Console.ReadLine();
+                }
             }
             
             Console.ReadLine();
