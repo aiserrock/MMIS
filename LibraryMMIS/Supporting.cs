@@ -137,9 +137,31 @@ namespace LibraryMMIS
             }
             return t % MOD;
         }
-        
-       
-        
-        
+
+        //поиск примитивных элементов , возращаетс первый примитивный элемент.
+        public static long PrimitivsMultiGroupZ(out string list, long n)
+        {
+            list = "";
+            long first_primitive = 0;
+            for (int i = 1; i < n; i++)
+            {
+                for (int j = 1; j < n; j++)
+                {
+                    if (bin_pow(i, j, n) == 1) //значит является примитивом
+                    {
+                        
+                        if(j == n-1)
+                        list += $"{i} ";
+                        break;
+                    }
+                }
+            }
+            return Convert.ToInt64(list.Split(" ")[0]);
+        }
+
+
+
+
+
     }
 }
