@@ -6,7 +6,7 @@ namespace MMIS
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Методы математической защиты информации:\nRSA - 1,\nРэббина - 2\nЭль-Гамаль - 3\nЭлектронноцифровая подпись Гамаля -4\n ");
+            Console.WriteLine("Методы математической защиты информации:\nRSA - 1,\nРэббина - 2\nЭль-Гамаль - 3\nЭлектронноцифровая подпись Гамаля -4\nНОД - Мультипликативный элемент - 5\n ");
             string methods = Console.ReadLine();
             long p, q, x;
             switch (methods)
@@ -38,10 +38,14 @@ namespace MMIS
                     break;
                 case "5":
                     long d1, x1, y1;
-                    Console.WriteLine(Supporting.GetNOD(7,3));
-                    Supporting.extendedEuclid(7, 3, out x1, out y1, out d1);
-                    Console.WriteLine($"{d1},{x1},{y1}");
-                    Console.WriteLine(Supporting.getMultiplicative(3,7));
+                    long a, m, inversive_elem;
+                    string output = "";
+                    Console.WriteLine("Введите 2 параметра\n -a число, для которого ищем обратное\n -m модуль");
+                    a = Convert.ToInt64(Console.ReadLine());
+                    m = Convert.ToInt64(Console.ReadLine());
+                    Supporting.getMultiplicative(a,m, out output);
+                    Console.WriteLine(output);
+                    
                     break;
                 default:
                         break;

@@ -40,7 +40,7 @@ namespace LibraryMMIS
             } 
         }
 
-        public static void extendedEuclid(long a, long b, out long x, out long y, out long d)
+        public static void extendedEuclid(long a, long b, out long x, out long y, out long d, out string outputEuclid)
         {
             long q, r, x0, x1, y0, y1;
             if (b == 0)
@@ -48,13 +48,16 @@ namespace LibraryMMIS
                 d = a;
                 x = 1;
                 y = 0;
+                outputEuclid = $"Т.к один из входных параметров = 0, то НОД({a},{b}) = {d}, x = {x}, y = {y}\n";
             }
 
             x0 = 1;
             x1 = 0;
             y0 = 0;
             y1 = 1;
-
+            outputEuclid = "";
+            outputEuclid +=$"x0 = {x0}\nx1 = {x1}\ny0 = {y0}\ny1 ={y1}\nИтерация q  r  a  b  x  y  x0  x1  y0  y1\n" ;
+            int count = 0;
             while (b > 0)
             {
                 q = a / b;
@@ -67,27 +70,38 @@ namespace LibraryMMIS
                 x1 = x;
                 y0 = y1;
                 y1 = y;
+                outputEuclid += $"{count}        {q}  {r}  {a}  {b}  {x}  {y}  {x0}  {x1}  {y0}  {y1}\n";
+                count++;
             }
 
             d = a;//NOD
             x = x0;
             y = y0;
+            outputEuclid += $"Получаем {d} = {a} * {x} + {b} * {y}\nНОД = {d}\nx = {x}\ny = {y}\n";
         }
         //Входные параметры
         //1) число - number
         //2) mod числа - mod
         //Выход
         //Число - обратное к number - reverseNumber
-        public static long getMultiplicative(long number, long mod) //Нод - мультипликативный элемент
+        public static void getMultiplicative(long number, long mod, out string output) //Нод - мультипликативный элемент
         {
             long d, x, y;
-            extendedEuclid(number,mod, out x, out y, out d);
+            string outputEuclid = "";
+            output = "";
+            extendedEuclid(number,mod, out x, out y, out d ,out outputEuclid);
             if (d == 1)
             {
-                return x;
+                x = (x % mod + mod) % mod;
+                output += outputEuclid;
+                output += $"x - обратное число к a\nт.к НОД = 1 , то x = (x % m + m) % m = {x}\n";
+            }
+            else
+            {
+                throw new Exception("Числа a и n должны быть взаимно простыми, не существует решения для входных параметров");
             }
 
-            throw new Exception("Числа a и n должны быть взаимно простыми, не существует решения для входных параметров");
+            
         }
 
         public static bool MutuallySimple(long val1, long val2) //проверка на взаимную простоту чисел.
