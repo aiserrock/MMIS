@@ -11,6 +11,7 @@ namespace MMIS
             long p, q, x, g, k,message;
             long c, d, n,y;
             long a, b;
+            long x1 = 0, y1=0;
             string outmessage = "";
             switch (methods)
             {
@@ -106,10 +107,9 @@ namespace MMIS
                     Console.WriteLine(ElGamaleSignature.SignatureVerificationGet(a,b,p,g,y,message));
                     break;
                 case "100":
-                    long x1 = 0, y1=0;
                     Console.Write("Введите n мультипликативной группе Z(n)*=(1....n-1) по модулю n: ");
                     n = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Введите a принадлежащий группе Z(n)* ");
+                    Console.Write("Введите a принадлежащий группе Z(n)*:");
                     a = Convert.ToInt64(Console.ReadLine());
                     Console.Write("Обратный элемент a^-1 поиск ...");
                     Supporting.ResolveDeofantovoEquation( ref x1, ref y1,a,n,1);
@@ -122,7 +122,15 @@ namespace MMIS
                     Console.WriteLine(outmessage);
                     break;
                 case "101":
+                    Console.Write("Введите a и b для диофантова уравнения ax+by = d = NOD(a,b)\n");
+                    Console.Write("a=: ");
+                    a = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("b=: ");
+                    b = Convert.ToInt64(Console.ReadLine());
+                    Console.WriteLine("Решим уравнение: ax+by=d , где d=NOD(a,b) (x обратный элемент при d=1): )");
+                    Console.WriteLine("x={x} , y={y} , d = {d}");
                     break;
+                
                     
                 default:
                         break;
