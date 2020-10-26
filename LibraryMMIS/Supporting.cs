@@ -39,6 +39,29 @@ namespace LibraryMMIS
                 return GetNOD(max % min, min); 
             } 
         }
+        public static void gnd(long a, long b, out string output) //Поиск NOD
+        {
+            long q, r;
+            output = "";
+            if (b == 0)
+            {
+                output = $"НОД({a},{b}) = {a}\n";
+                
+            }
+            int count = 0;
+            output = "НОД\nИтерация   q   r   a   b\n";
+            while (b>0)
+            {
+                q = a / b;
+                r = a - q * b;
+                a = b;
+                b = r;
+                output += $"{count}          {q}   {r}   {a}   {b}\n";
+                count++;
+            }
+
+            output +=$"НОД = {a}\n" ;
+        }
 
         public static void extendedEuclid(long a, long b, out long x, out long y, out long d, out string outputEuclid)
         {

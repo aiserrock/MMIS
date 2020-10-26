@@ -60,11 +60,14 @@ namespace LibraryMMIS
         }
         public override string ToString()
         {
+            string outputGND;
+            Supporting.gnd(e,fi, out outputGND);
             return $"p = {p} , q = {q}\n"
                    + $"n=p*q={n}\n"
                    + $"fi(n)=(p-1)(q-1)={fi}\n"
                    + $"Возьмем взаимнопростое число e = {e}\n"
                    + $"Публичный ключ: {PublicKey()}\n"
+                   + $"{outputGND}"
                    + $"Из уравнения ed = 1 mod fi(n), получаем d = {d}\n"
                    + $"Приватный ключ: {PrivateKey()}\n"
                    + $"Зашифровываем сообщение x = {x}\n"
