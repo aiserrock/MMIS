@@ -6,7 +6,7 @@ namespace MMIS
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Методы математической защиты информации:\nRSA - 1,\nРэббина - 2\nЭль-Гамаль - 3\nЭлектронноцифровая подпись Гамаля -4\nИли дополнительные решения к методам (1д ,3д,4д)\n");
+            Console.WriteLine("Методы математической защиты информации:\nRSA - 1,\nРэббина - 2\nЭль-Гамаль - 3\nЭлектронноцифровая подпись Гамаля -4\nНОД - Мультипликативный элемент - 5\nИли дополнительные решения к методам (1д ,3д,4д)\n");
             string methods = Console.ReadLine();
             long p, q, x, g, k,message;
             long c, d, n,y;
@@ -58,6 +58,17 @@ namespace MMIS
                     message = Convert.ToInt64(Console.ReadLine());
                     ElGamale elGamale= new ElGamale(p,g,x,k,message);
                     Console.WriteLine(elGamale.ToString());
+                    break;
+                case "5":
+                    long d1;
+                    long m, inversive_elem;
+                    string output = "";
+                    Console.WriteLine("Введите 2 параметра\n -a число, для которого ищем обратное\n -m модуль");
+                    a = Convert.ToInt64(Console.ReadLine());
+                    m = Convert.ToInt64(Console.ReadLine());
+                    Supporting.getMultiplicative(a,m, out output);
+                    Console.WriteLine(output);
+                    
                     break;
                 case "3д":
                     Console.WriteLine(
