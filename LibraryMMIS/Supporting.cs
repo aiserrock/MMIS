@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace LibraryMMIS
@@ -209,11 +210,20 @@ namespace LibraryMMIS
             if (p % 2 == 0)
             {
                 long t = bin_pow(b, p / 2, MOD);
+                //if (t < 0)
+                //{
+                //    t += MOD;
+                //}
                 return t * t % MOD;
             }
             else
             {
-                return bin_pow(b, p - 1, MOD) * b % MOD;
+                long t = bin_pow(b, p - 1, MOD) * b % MOD;
+                //if (t < 0)
+                //{
+                //    t += MOD;
+                //}
+                return t;
             }
         }
 
@@ -235,8 +245,8 @@ namespace LibraryMMIS
             for (int i = 0; i < pow; i++)
             {
                 t *= inverse_element(a, MOD);
+                t %= MOD;
             }
-
             return t % MOD;
         }
 

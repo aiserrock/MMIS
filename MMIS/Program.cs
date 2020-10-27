@@ -15,6 +15,7 @@ namespace MMIS
             long a, b;
             long x1 = 0, y1 = 0;
             string outmessage = "";
+            Console.WriteLine(Supporting.divide_pow(15,23,31));
             while (true)
             {
                 switch (methods)

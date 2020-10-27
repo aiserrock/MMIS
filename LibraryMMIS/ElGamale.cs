@@ -50,7 +50,7 @@ namespace LibraryMMIS
                 A = Supporting.bin_pow(g, k, p);
                     
                 B = (Supporting.bin_pow(Y, k, p)*(m%p))%p;
-                    
+                
                 DecodeM = ((B % p) * Supporting.divide_pow(A, x,p)) % p;
             }
             catch (Exception e)
