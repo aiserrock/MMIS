@@ -8,7 +8,7 @@ namespace LibraryMMIS
         private long g { get; set; }
         private long x { get; set; }
         private long Y { get; set; }
-        private long m { get; set; }
+        private long m { get; set; }//сообщение
         private long k { get; set; }
         private long A { get; set; }
         private long B { get; set; }
@@ -74,16 +74,22 @@ namespace LibraryMMIS
 
         public override string ToString()
         {
-            return "Решение: \n" +
-                   $"p = {p}\n" +
-                   $"q = {g}\n" +
-                   $"x = {x}\n" +
-                   $"Y = {Y}\n" +
-                   $"m = {m}\n" +
-                   $"k = {k}\n" +
-                   $"A = {A}\n" +
-                   $"B = {B}\n" +
-                   $"Decodem = {DecodeM}\n";
+            string output;
+            Supporting.gnd(k, p - 1, out output);
+            return $"Выберем числа p={p} и g={g}(примитивный элемент) и случайный секретный ключ x={x}\n" +
+                   $"Вычислим значение открытого ключа y = g^x mod p = {g}^{x} mod {p} ={Y}\n" +
+                   $"Открытый ключ (p={p},g={g},y={Y})" +
+                   $"Пусть текст M = {m},которое надо зашифровать." +
+                   $"Выберем случайное число k = {k}. Убедимся,что НОД(k,p-1)=1" +
+                   $"{output}" +
+                   $"если НОД = 1, то действительно НОД({k},{p-1})=1" +
+                   $"Вычисляем пару чисел (a,b)" +
+                   $"a=g^k mod p = {A}," +
+                   $"b=y^k*M mod p = {B}," +
+                   $"Получили пару чисел (a,b)=({A},{B}), которая и есть зашифрованный текст." +
+                   $"" +
+                   $"Выполним расшифрование этого шифр-текста" +
+                   $"M = b/a^x mod p = ((b mod p)*(a^-x mod p)) mod p =({B} mod {p})({A}^(-{x}) mod {p})=(({(B % p)})*({Supporting.divide_pow(A, x, p)})) mod {p}={DecodeM} ";
         }
     }
 }

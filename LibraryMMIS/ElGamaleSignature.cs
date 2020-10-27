@@ -37,11 +37,11 @@ namespace LibraryMMIS
             {
                 try
                 {
-                    //if (!Supporting.Simple(p))
-                      //  throw new Exception("p should be simple");
+                    if (!Supporting.Simple(p))
+                        throw new Exception("p should be simple");
                     this.p = p;
-                    //if (!(1 < g && g < p))
-                      //  throw new Exception("Condition 1<g<p is not met");
+                    if (!(1 < g && g < p))
+                        throw new Exception("Condition 1<g<p is not met");
                     this.g = g;
                     this.y = Supporting.bin_pow(g, sk.x, p);
                 }
@@ -66,8 +66,8 @@ namespace LibraryMMIS
             {
                 if (x == 0)
                     x = r.Next(1, (int) p);
-                //if (!(1 < x && x < p))
-                  //  throw new Exception("Condition 1<x<p is not met");
+                if (!(1 < x && x < p))
+                  throw new Exception("Condition 1<x<p is not met");
                 this.x = x;
             }
 
@@ -132,8 +132,9 @@ namespace LibraryMMIS
                        $"Получатель вычисляет два числа:\n" +
                        $"1)Number1=(y^a)*(a^b) mod p = (((y^a) mod p)*((a^b) mod p)) mod p." +
                        $"2)Number2=g^M mod p";
-                       // проверка подлинности подписи
-            long ANumber1 = (Supporting.bin_pow(publicKey.y, a, publicKey.p) * Supporting.bin_pow(a, b, publicKey.p)) % publicKey.p;
+            // проверка подлинности подписи
+            long ANumber1 = (Supporting.bin_pow(publicKey.y, a, publicKey.p) * Supporting.bin_pow(a, b, publicKey.p)) %
+                            publicKey.p;
             long ANumber2 = Supporting.bin_pow(publicKey.g, Message, publicKey.p);
 
             if (ANumber1 == ANumber2)
@@ -142,18 +143,26 @@ namespace LibraryMMIS
             }
             else
             {
-                resolve += $"Т.к Number1={ANumber1} и Number2={ANumber2} - они не равны друг друга ,поэтому сообщение является фальшивым или подпись неподлинная ";
+                resolve +=
+                    $"Т.к Number1={ANumber1} и Number2={ANumber2} - они не равны друг друга ,поэтому сообщение является фальшивым или подпись неподлинная ";
             }
+
             return "";
         }
 
 
         public override string ToString()
         {
-            return $"Выберем числа p={pk.p} и g={pk.g} и случайный секретный ключ x={sk.x}\n"
+            string output;
+            Supporting.gnd(k, pk.p - 1, out output);
+            return $"Выберем числа p={pk.p} и g={pk.g}(примитивный элемент) и случайный секретный ключ x={sk.x}\n"
                    + $"Вычислим значение открытого ключа y = g^x mod p = {pk.g}^{sk.x} mod {pk.p} ={pk.y}\n"
                    + $"Вычислим цифровую подпись для сообщения M = {M}\n"
-                   + $"    1)Сначала выберем случайное число k = {k}, 1<k<p-1, такое, что числа k и p-1 взаимно простые - {Supporting.MutuallySimple(k, pk.p - 1)}\n"
+                   + $"    1)Сначала выберем случайное число k = {k}, 1<k<p-1, такое, что числа k и p-1 взаимно простые - {Supporting.MutuallySimple(k, pk.p - 1)}\n" +
+                   $" |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" +
+                   $" Проверка на взаимную простоту чисел k и p-1 ,т.е убедимся ,что НОД(k,p-1)=1\n {output}" +
+                   $" Если НОД = 1, то действительно НОД({k},{pk.p-1})=1                                                                                      " +
+                   $" |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
                    + $"1.1)Найдём число k^-1 такое что выполняется условие k*k^(-1) = 1 mod(p-1) т.е {k}*{k}^(-1) = 1 mod {pk.p - 1} | k^-1 = {ReverseK} \n"
                    + $"    2)Вычислить числа a = g^k mod p = {pk.g}^{k} mod {pk.p} = {A}, и с помощью секретного ключа x вычислим b = (M-xa)k^-1 mod (p-1)={B}\n"
                    + $"Тем самым цифровая подпись представляет собой пару чисел: a = {A}, b = {B}..\n"
