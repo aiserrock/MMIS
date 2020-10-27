@@ -36,8 +36,7 @@ namespace LibraryMMIS
             long d;
             try
             {
-                if(!(Supporting.Simple(p)&&Supporting.Simple(q)&&p%4==3&&q%4==3))
-                    throw new Exception("p и q обязаны быть простыми для метода Rabbin ,а также для удобства просчёта p и q по модулю 4 обязаны равняться трём");
+
                 this.p = p;
                 this.q = q;
                 this.x = x;

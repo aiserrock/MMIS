@@ -21,20 +21,17 @@ namespace LibraryMMIS
         {
             try
             {
-                if(!Supporting.Simple(p)||!Supporting.Simple(q))
-                    throw new Exception("p и q обязаны быть простыми для метода RSA");
+
                 this.p = p;
                 this.q = q;
                 n = p*q;
                 fi = (p-1)*(q-1);
                 e = Supporting.GetMutuallySimple(fi);
                 d = Supporting.ResolveModuleEquation(1,n-1,e,fi,1);
-                if(!(0<x && x<n))
-                    throw new Exception("x должен быть больше нуля и меньше n");
+
                 this.x = x;
                 C = Supporting.bin_pow(x, e, n);
-                if(!(0<C && C<n))
-                    throw new Exception("C должен быть больше нуля и меньше n");
+
                 X = Supporting.bin_pow(C, d, n);
             }
             catch (Exception exception)

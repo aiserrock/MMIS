@@ -37,11 +37,9 @@ namespace LibraryMMIS
             {
                 try
                 {
-                    if (!Supporting.Simple(p))
-                        throw new Exception("p should be simple");
+
                     this.p = p;
-                    if (!(1 < g && g < p))
-                        throw new Exception("Condition 1<g<p is not met");
+
                     this.g = g;
                     this.y = Supporting.bin_pow(g, sk.x, p);
                 }
@@ -66,8 +64,7 @@ namespace LibraryMMIS
             {
                 if (x == 0)
                     x = r.Next(1, (int) p);
-                if (!(1 < x && x < p))
-                  throw new Exception("Condition 1<x<p is not met");
+
                 this.x = x;
             }
 
@@ -94,8 +91,6 @@ namespace LibraryMMIS
             else
             {
                 k = K;
-                if (!(1 < k && k < p - 1) && !Supporting.MutuallySimple(k, p - 1))
-                    throw new Exception("k - сессионный ключ обязан придерживаться условия 1<k<p-1");
             }
 
 
