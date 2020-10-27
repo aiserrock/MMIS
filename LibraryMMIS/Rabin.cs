@@ -28,15 +28,16 @@ namespace LibraryMMIS
         private long c { get; set; }//защифрованное число-сообщение
         
 
-        
+        private string outputExtendEuqlid;
         public Rabin(long p,long q,long x)
         {
             long a = 0;
             long b = 0;
+            long d;
             try
             {
-                //if(!(Supporting.Simple(p)&&Supporting.Simple(q)&&p%4==3&&q%4==3))
-                //    throw new Exception("p и q обязаны быть простыми для метода Rabbin ,а также для удобства просчёта p и q по модулю 4 обязаны равняться трём");
+                if(!(Supporting.Simple(p)&&Supporting.Simple(q)&&p%4==3&&q%4==3))
+                    throw new Exception("p и q обязаны быть простыми для метода Rabbin ,а также для удобства просчёта p и q по модулю 4 обязаны равняться трём");
                 this.p = p;
                 this.q = q;
                 this.x = x;
@@ -50,6 +51,7 @@ namespace LibraryMMIS
                 s = Supporting.bin_pow(c, (q + 1) / 4, q);
                 
                 Supporting.ResolveDeofantovoEquation(ref a, ref b, p, q, 1);
+                Supporting.extendedEuclid(p,q,out a,out b,out d, out outputExtendEuqlid);
                 this.a = a;
                 this.b = b;
                 m1 = +((a * p * s + b * q * r)) % n;
@@ -77,19 +79,21 @@ namespace LibraryMMIS
 
         public override string ToString()
         {
-            return $"Выбрали два простых числа p={p} и q={q},которые по модулю 4 равны 3\n"
-                   + $"Cекретный ключ n = pq = {n}\n"
+            return $"Выбрали два простых числа p={p} и q={q} ((p,q)- секретный ключ),которые по модулю 4 равны 3ем\n"
+                   + $"Открытый ключ n = pq = {n}\n"
                    + $"Зашифруем сообщение m = {x}\n"
-                   + $"Для зашифрования c=m^2 mod n ={x*x} mod {n} ={c}\n"
+                   + $"Для зашифрования c=m^2 mod n ={x * x} mod {n} ={c}\n"
                    + $"Для расшифрования найдем вспомогательные переменные: \n"
                    + $"1) r = c^(p+1/4) mod p = {r}\n"
                    + $"2) s = c^(p+1/4) mod q = {s}\n"
-                   + $" Найдём целые числа a и b такие что ap + bq = 1, a{p} + b{q} = 1\na = {a}, b = {b}\n"
-                   + $" Тогда одно из этих 4ех сообщений будет нашим зашифрованным:\n"
-                   + $"m1 = +(aps+bqr) mod n={m1}\n"
-                   + $"m2 = -(aps+bqr) mod n={m2}\n"
-                   + $"m3 = +(aps-bqr) mod n={m3}\n"
-                   + $"m4 = -(aps-bqr) mod n={m4}\n";
+                   + $"Найдём целые числа x и y, такие что px + qy = 1 = NOD(p,q),\n"
+                   + $"{outputExtendEuqlid}"
+                   + $"x{p} + y{q} = 1\nx = {a}, y = {b}\n"
+                   + $"Тогда одно из этих 4ех сообщений будет нашим зашифрованным:\n"
+                   + $"m1 = +(xps+yqr) mod n={m1}\n"
+                   + $"m2 = -(xps+yqr) mod n={m2}\n"
+                   + $"m3 = +(xps-yqr) mod n={m3}\n"
+                   + $"m4 = -(xps-yqr) mod n={m4}\n";
         }
     }
 }

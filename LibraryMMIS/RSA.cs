@@ -50,7 +50,7 @@ namespace LibraryMMIS
         
         public string PrivateKey()
         {
-            return $"({p},{q},{d})";
+            return $"({d},{n})";
         }
         
         public static string DecodeMessageGet(long c, long d, long n)
